@@ -1,8 +1,9 @@
 import './App.css';
-
 import './CV.css';
 import CV from './components/CV';
 import NameArea from './components/NameArea';
+import SchoolArea from './components/SchoolArea';
+
 import { useState } from 'react';
 
 export default function App() {
@@ -15,6 +16,8 @@ export default function App() {
   const [lastName, setLastName] = useState('LastName');
   const [email, setEmail] = useState('youremail@email.com');
   const [tel, setTel] = useState('+336000000');
+  const [schoolExp, setSchoolExp] = useState([]);
+  const [editSchoolExp, setEditSchoolExp] = useState(false);
 
   function handleFirstName(newValue) {
     setFirstName(newValue);
@@ -30,6 +33,16 @@ export default function App() {
 
   function handleTel(newValue) {
     setTel(newValue);
+  }
+
+  function addSchoolExpFn(array) {
+    setSchoolExp([...schoolExp, array]);
+    console.log(schoolExp);
+  }
+
+  function handleEditSchoolExp() {
+    setEditSchoolExp(true);
+    console.log(editSchoolExp);
   }
 
   // ----------------------------------------------- Edit values ----------------------------------------------
@@ -53,6 +66,8 @@ export default function App() {
           lastName={lastName}
           email={email}
           tel={tel}
+          schoolExpArray={schoolExp}
+          editSchoolExpFn={handleEditSchoolExp}
         ></CV>
       </div>
       <div className="App-Edit">
@@ -63,6 +78,10 @@ export default function App() {
           editEmail={handleEmail}
           editTel={handleTel}
         ></NameArea>
+        <SchoolArea
+          className={schoolAreaClass}
+          addSchoolExpFn={addSchoolExpFn}
+        ></SchoolArea>
       </div>
     </>
   );

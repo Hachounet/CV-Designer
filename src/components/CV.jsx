@@ -1,8 +1,18 @@
 import PropTypes from 'prop-types';
 import CVNameArea from './CVNameArea';
+import CVSchoolArea from './CVSchoolArea';
 
-export default function CV({ className, firstName, lastName, email, tel }) {
+export default function CV({
+  className,
+  firstName,
+  lastName,
+  email,
+  tel,
+  schoolExpArray,
+  editSchoolExpFn,
+}) {
   const CVNameAreaClass = 'CV-name-area-class';
+  const CVSchoolAreaClass = 'CV-school-area-class';
 
   return (
     <div className={className}>
@@ -13,6 +23,11 @@ export default function CV({ className, firstName, lastName, email, tel }) {
         email={email}
         tel={tel}
       ></CVNameArea>
+      <CVSchoolArea
+        className={CVSchoolAreaClass}
+        array={schoolExpArray}
+        editSchoolExpFn={editSchoolExpFn}
+      ></CVSchoolArea>
     </div>
   );
 }

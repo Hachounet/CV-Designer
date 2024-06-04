@@ -27,11 +27,13 @@
   height: 100vh;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.name-area-class {
+.name-area-class,
+.school-area-class {
   border: 1px solid darkblue;
   display: flex;
   flex-direction: column;
