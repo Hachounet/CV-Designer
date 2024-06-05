@@ -43,4 +43,10 @@
 
   border-radius: 15px;
   background-color: whitesmoke;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

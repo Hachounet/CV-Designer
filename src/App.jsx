@@ -16,8 +16,10 @@ export default function App() {
   const [lastName, setLastName] = useState('LastName');
   const [email, setEmail] = useState('youremail@email.com');
   const [tel, setTel] = useState('+336000000');
+
   const [schoolExp, setSchoolExp] = useState([]);
-  const [editSchoolExp, setEditSchoolExp] = useState(false);
+  const [schoolEditionBoolean, setSchoolEditionBoolean] = useState(false);
+  const [dataToEdit, setDataToEdit] = useState({});
 
   function handleFirstName(newValue) {
     setFirstName(newValue);
@@ -36,26 +38,40 @@ export default function App() {
   }
 
   function addSchoolExpFn(array) {
-    setSchoolExp([...schoolExp, array]);
-    console.log(schoolExp);
+    setSchoolExp((prevSchoolExp) => [...prevSchoolExp, array]);
   }
 
-  function handleEditSchoolExp() {
-    setEditSchoolExp(true);
-    console.log(editSchoolExp);
+  function toggleEditionBoolean() {
+    setSchoolEditionBoolean((previousState) => !previousState);
+  }
+
+  function handleEditSchoolExp(event) {
+    const btn = event.target;
+    const parent = btn.closest('li');
+    const dataKey = parent.getAttribute('data-key');
+
+    schoolExp.forEach((array, arrayIndex) => {
+      if (array[4] === dataKey) {
+        console.log('This is array number', arrayIndex);
+        giveToEdition(array, arrayIndex);
+      }
+    });
+  }
+
+  function giveToEdition(array) {
+    console.log('GiveToEdition function');
+    setSchoolEditionBoolean(true);
+    setDataToEdit({
+      school: array[0],
+      study: array[1],
+      dateBegin: array[2],
+      dateEnd: array[3],
+      key: array[4],
+    });
+    console.log(dataToEdit);
   }
 
   // ----------------------------------------------- Edit values ----------------------------------------------
-  let [editFirstName, setEditFirstName] = useState('First Name Edition');
-  let [editLastName, setEditLastName] = useState('Last Name Edition');
-
-  function handleEditFirstName(newValue) {
-    setEditFirstName(newValue);
-  }
-
-  function handleEditLastName(newValue) {
-    setEditLastName(newValue);
-  }
 
   return (
     <>
@@ -81,6 +97,9 @@ export default function App() {
         <SchoolArea
           className={schoolAreaClass}
           addSchoolExpFn={addSchoolExpFn}
+          schoolEditionBoolean={schoolEditionBoolean}
+          dataToEdit={dataToEdit}
+          toggleEditionBoolean={toggleEditionBoolean}
         ></SchoolArea>
       </div>
     </>

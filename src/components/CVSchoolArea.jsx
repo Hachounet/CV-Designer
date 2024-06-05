@@ -9,11 +9,14 @@ export default function CVSchoolArea({ className, array, editSchoolExpFn }) {
         {array.map((subArray) => {
           const key = subArray[subArray.length - 1]; // Utiliser le dernier élément comme clé
           return (
-            <li key={key}>
+            <li
+              key={key}
+              data-key={key}
+            >
               <span>{subArray[0]}</span> - <span>{subArray[1]}</span>
               <br /> From<span>{subArray[2]}</span> to{' '}
               <span>{subArray[3]}</span>
-              <EditBtn onClick={editSchoolExpFn}></EditBtn>
+              <EditBtn editSchoolExpFn={editSchoolExpFn}></EditBtn>
             </li>
           );
         })}

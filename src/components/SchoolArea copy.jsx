@@ -49,43 +49,40 @@ export default function SchoolArea({
     setDateEndValue('');
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleClick = () => {
     const array = [school, study, dateBegin, dateEnd, uuidv4()];
     addSchoolExpFn(array);
-    e.target.reset();
     handleReset();
+    // toggleEditionBoolean();
   };
 
   return (
     <div className={className}>
-      <form onSubmit={handleSubmit}>
-        <NameInputs
-          type="text"
-          placeholder="School Name"
-          value={school}
-          onChange={handleSchoolChange}
-        />
-        <NameInputs
-          type="text"
-          placeholder="Studies"
-          value={study}
-          onChange={handleStudyChange}
-        />
-        <NameInputs
-          type="date"
-          placeholder="12/11/2024"
-          value={dateBegin}
-          onChange={handleDateBeginChange}
-        />
-        <NameInputs
-          type="date"
-          placeholder="13/11/2024"
-          value={dateEnd}
-          onChange={handleDateEndChange}
-        />
-        <button type="submit">Validate</button>
-      </form>
+      <NameInputs
+        type="text"
+        placeholder="School Name"
+        value={school}
+        onChange={handleSchoolChange}
+      />
+      <NameInputs
+        type="text"
+        placeholder="Studies"
+        value={study}
+        onChange={handleStudyChange}
+      />
+      <NameInputs
+        type="date"
+        placeholder="12/11/2024"
+        value={dateBegin}
+        onChange={handleDateBeginChange}
+      />
+      <NameInputs
+        type="date"
+        placeholder="13/11/2024"
+        value={dateEnd}
+        onChange={handleDateEndChange}
+      />
+      <button onClick={handleClick}>Validate</button>
     </div>
   );
 }
