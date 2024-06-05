@@ -14,6 +14,8 @@ export default function SchoolArea({
   const [study, setStudyValue] = useState('');
   const [dateBegin, setDateBeginValue] = useState('');
   const [dateEnd, setDateEndValue] = useState('');
+  const btnTitleInitState = 'Validate';
+  const [btnTitle, setBtnTitle] = useState(btnTitleInitState);
 
   useEffect(() => {
     if (schoolEditionBoolean && dataToEdit) {
@@ -23,6 +25,7 @@ export default function SchoolArea({
       setStudyValue(dataToEdit.study);
       setDateBeginValue(dataToEdit.dateBegin);
       setDateEndValue(dataToEdit.dateEnd);
+      setBtnTitle('Edit');
     }
   }, [schoolEditionBoolean, dataToEdit]);
 
@@ -48,6 +51,7 @@ export default function SchoolArea({
     setStudyValue('');
     setDateBeginValue('');
     setDateEndValue('');
+    setBtnTitle(btnTitleInitState);
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +95,7 @@ export default function SchoolArea({
           value={dateEnd}
           onChange={handleDateEndChange}
         />
-        <button type="submit">Validate</button>
+        <button type="submit">{btnTitle}</button>
       </form>
       <div>
         <p>School: {school}</p>
