@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import EditBtn from './EditBtn';
 
-export default function CVSchoolArea({ className, array, editSchoolExpFn }) {
+export default function CVSchoolArea({ className, array, editFn }) {
   return (
     <div className={className}>
       <h2>School and Studies Experiences</h2>
@@ -16,7 +16,7 @@ export default function CVSchoolArea({ className, array, editSchoolExpFn }) {
               <span>{subArray[0]}</span> - <span>{subArray[1]}</span>
               <br /> From<span>{subArray[2]}</span> to{' '}
               <span>{subArray[3]}</span>
-              <EditBtn editSchoolExpFn={editSchoolExpFn}></EditBtn>
+              <EditBtn editFn={editFn}></EditBtn>
             </li>
           );
         })}

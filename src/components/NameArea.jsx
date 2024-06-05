@@ -9,14 +9,13 @@ export default function NameArea({
   editEmail,
   editTel,
 }) {
-  let [inputFirstNameValue, setInputFirstNameValue] = useState('');
-  let [inputLastNameValue, setInputLastNameValue] = useState('');
-  let [inputEmailValue, setInputEmailValue] = useState('');
-  let [inputTelValue, setInputTelValue] = useState('');
+  const [inputFirstNameValue, setInputFirstNameValue] = useState('');
+  const [inputLastNameValue, setInputLastNameValue] = useState('');
+  const [inputEmailValue, setInputEmailValue] = useState('');
+  const [inputTelValue, setInputTelValue] = useState('');
 
   const handleFirstNameChange = (e) => {
-    const value = e.target.value;
-    setInputFirstNameValue(value);
+    setInputFirstNameValue(e.target.value);
   };
 
   const handleLastNameChange = (e) => {
@@ -34,41 +33,53 @@ export default function NameArea({
     setInputTelValue(value);
   };
 
-  const handleClick = () => {
+  const handleReset = () => {
+    setInputFirstNameValue('');
+    setInputLastNameValue('');
+    setInputEmailValue('');
+    setInputTelValue('');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     editFirstName(inputFirstNameValue);
     editLastName(inputLastNameValue);
     editEmail(inputEmailValue);
     editTel(inputTelValue);
+    e.target.reset();
+    handleReset();
   };
 
   return (
     <div className={className}>
-      <NameInputs
-        type="text"
-        placeholder="First Name"
-        value={inputFirstNameValue}
-        onChange={handleFirstNameChange}
-      ></NameInputs>
-      <NameInputs
-        type="text"
-        placeholder="Last Name"
-        value={inputLastNameValue}
-        onChange={handleLastNameChange}
-      ></NameInputs>
-      <NameInputs
-        type="text"
-        placeholder="Email"
-        value={inputEmailValue}
-        onChange={handleEmailChange}
-      ></NameInputs>
-      <NameInputs
-        type="text"
-        placeholder="Tel Number"
-        value={inputTelValue}
-        onChange={handleTelChange}
-      ></NameInputs>
+      <form onSubmit={handleSubmit}>
+        <NameInputs
+          type="text"
+          placeholder="First Name"
+          value={inputFirstNameValue}
+          onChange={handleFirstNameChange}
+        ></NameInputs>
+        <NameInputs
+          type="text"
+          placeholder="Last Name"
+          value={inputLastNameValue}
+          onChange={handleLastNameChange}
+        ></NameInputs>
+        <NameInputs
+          type="text"
+          placeholder="Email"
+          value={inputEmailValue}
+          onChange={handleEmailChange}
+        ></NameInputs>
+        <NameInputs
+          type="text"
+          placeholder="Tel Number"
+          value={inputTelValue}
+          onChange={handleTelChange}
+        ></NameInputs>
 
-      <button onClick={handleClick}>Validate</button>
+        <button type="submit">Validate</button>
+      </form>
     </div>
   );
 }

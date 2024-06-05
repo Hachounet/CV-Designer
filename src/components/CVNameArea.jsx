@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import EditBtn from './EditBtn';
 
 export default function CVNameArea({
   className,

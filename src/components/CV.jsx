@@ -9,7 +9,7 @@ export default function CV({
   email,
   tel,
   schoolExpArray,
-  editSchoolExpFn,
+  editFn,
 }) {
   const CVNameAreaClass = 'CV-name-area-class';
   const CVSchoolAreaClass = 'CV-school-area-class';
@@ -26,7 +26,7 @@ export default function CV({
       <CVSchoolArea
         className={CVSchoolAreaClass}
         array={schoolExpArray}
-        editSchoolExpFn={editSchoolExpFn}
+        editFn={editFn}
       ></CVSchoolArea>
     </div>
   );

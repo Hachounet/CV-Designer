@@ -1,3 +1,3 @@
-export default function EditBtn({ editSchoolExpFn }) {
-  return <button onClick={editSchoolExpFn}>Edit</button>;
+export default function EditBtn({ editFn }) {
+  return <button onClick={editFn}>Edit</button>;
 }

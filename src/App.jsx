@@ -100,7 +100,7 @@ export default function App() {
           email={email}
           tel={tel}
           schoolExpArray={schoolExp}
-          editSchoolExpFn={handleEditSchoolExp}
+          editFn={handleEditSchoolExp}
         ></CV>
       </div>
       <div className="App-Edit">
