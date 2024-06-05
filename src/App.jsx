@@ -5,10 +5,12 @@ import NameArea from './components/NameArea';
 import SchoolArea from './components/SchoolArea';
 
 import { useState } from 'react';
+import WorkArea from './components/WorkArea';
 
 export default function App() {
   const nameAreaClass = 'name-area-class';
   const schoolAreaClass = 'school-area-class';
+  const workAreaClass = 'work-area-class';
   const CVClass = 'CV-class';
 
   // ------------------------------------------------ CV Values ----------------------------------------------
@@ -20,6 +22,10 @@ export default function App() {
   const [schoolExp, setSchoolExp] = useState([]);
   const [schoolEditionBoolean, setSchoolEditionBoolean] = useState(false);
   const [dataToEdit, setDataToEdit] = useState({});
+
+  const [workExp, setWorkExp] = useState([]);
+  const [workEditionBoolean, setWorkEditionBoolean] = useState(false);
+  const [workDataToEdit, setWorkDataToEdit] = useState({});
 
   function handleFirstName(newValue) {
     setFirstName(newValue);
@@ -58,8 +64,25 @@ export default function App() {
     }
   }
 
+  function addWorkExpFn(array) {
+    const index = workExp.findIndex((exp) => exp[4] === array[4]);
+    if (index !== -1) {
+      const updatedWorkExp = [...workExp];
+      updatedWorkExp[index] = array;
+      setWorkExp(updatedWorkExp);
+      toggleWorkEditionBoolean();
+      setWorkDataToEdit({});
+    } else {
+      setWorkExp((prevWorkExp) => [...prevWorkExp, array]);
+    }
+  }
+
   function toggleEditionBoolean() {
     setSchoolEditionBoolean((previousState) => !previousState);
+  }
+
+  function toggleWorkEditionBoolean() {
+    setWorkEditionBoolean((previousState) => !previousState);
   }
 
   function handleEditSchoolExp(event) {
@@ -70,7 +93,19 @@ export default function App() {
     schoolExp.forEach((array, arrayIndex) => {
       if (array[4] === dataKey) {
         console.log('This is array number', arrayIndex);
-        giveToEdition(array, arrayIndex);
+        giveToEdition(array);
+      }
+    });
+  }
+
+  function handleWorkEditSchoolExp(event) {
+    const btn = event.target;
+    const parent = btn.closest('li');
+    const dataKey = parent.getAttribute('data-key');
+
+    workExp.forEach((array) => {
+      if (array[4] === dataKey) {
+        giveToWorkEdition(array);
       }
     });
   }
@@ -88,6 +123,17 @@ export default function App() {
     console.log(dataToEdit);
   }
 
+  function giveToWorkEdition(array) {
+    setWorkEditionBoolean(true);
+    setWorkDataToEdit({
+      work: array[0],
+      enterprise: array[1],
+      dateBegin: array[2],
+      dateEnd: array[3],
+      key: array[4],
+    });
+  }
+
   // ----------------------------------------------- Edit values ----------------------------------------------
 
   return (
@@ -100,7 +146,9 @@ export default function App() {
           email={email}
           tel={tel}
           schoolExpArray={schoolExp}
+          workExpArray={workExp}
           editFn={handleEditSchoolExp}
+          workEditFn={handleWorkEditSchoolExp}
         ></CV>
       </div>
       <div className="App-Edit">
@@ -116,8 +164,13 @@ export default function App() {
           addSchoolExpFn={addSchoolExpFn}
           schoolEditionBoolean={schoolEditionBoolean}
           dataToEdit={dataToEdit}
-          toggleEditionBoolean={toggleEditionBoolean}
         ></SchoolArea>
+        <WorkArea
+          className={workAreaClass}
+          addWorkExpFn={addWorkExpFn}
+          workEditionBoolean={workEditionBoolean}
+          workDataToEdit={workDataToEdit}
+        ></WorkArea>
       </div>
     </>
   );

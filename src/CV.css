@@ -15,7 +15,8 @@
   }
 }
 
-.CV-school-area-class {
+.CV-school-area-class,
+.CV-work-area-class {
   h2 {
     display: flex;
     justify-content: center;

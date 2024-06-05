@@ -3,38 +3,38 @@ import { useState, useEffect } from 'react';
 import NameInputs from './NameInputs';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function SchoolArea({
+export default function WorkArea({
   className,
-  addSchoolExpFn,
-  schoolEditionBoolean,
-  dataToEdit,
+  addWorkExpFn,
+  workEditionBoolean,
+  workDataToEdit,
 }) {
-  const [school, setSchoolValue] = useState('');
-  const [study, setStudyValue] = useState('');
+  const [work, setWorkValue] = useState('');
+  const [enterprise, setEnterpriseValue] = useState('');
   const [dateBegin, setDateBeginValue] = useState('');
   const [dateEnd, setDateEndValue] = useState('');
   const btnTitleInitState = 'Validate';
   const [btnTitle, setBtnTitle] = useState(btnTitleInitState);
 
   useEffect(() => {
-    if (schoolEditionBoolean && dataToEdit) {
+    if (workEditionBoolean && workDataToEdit) {
       console.log('Inside useEffect');
-      console.log(dataToEdit.school);
-      setSchoolValue(dataToEdit.school);
-      setStudyValue(dataToEdit.study);
-      setDateBeginValue(dataToEdit.dateBegin);
-      setDateEndValue(dataToEdit.dateEnd);
+      console.log(workDataToEdit.work);
+      setWorkValue(workDataToEdit.work);
+      setEnterpriseValue(workDataToEdit.enterprise);
+      setDateBeginValue(workDataToEdit.dateBegin);
+      setDateEndValue(workDataToEdit.dateEnd);
       setBtnTitle('Edit');
     }
-  }, [schoolEditionBoolean, dataToEdit]);
+  }, [workEditionBoolean, workDataToEdit]);
 
-  const handleSchoolChange = (e) => {
+  const handleWorkChange = (e) => {
     e.preventDefault();
-    setSchoolValue(e.target.value);
+    setWorkValue(e.target.value);
   };
 
-  const handleStudyChange = (e) => {
-    setStudyValue(e.target.value);
+  const handleEnterpriseChange = (e) => {
+    setEnterpriseValue(e.target.value);
   };
 
   const handleDateBeginChange = (e) => {
@@ -46,8 +46,8 @@ export default function SchoolArea({
   };
 
   const handleReset = () => {
-    setSchoolValue('');
-    setStudyValue('');
+    setWorkValue('');
+    setEnterpriseValue('');
     setDateBeginValue('');
     setDateEndValue('');
     setBtnTitle(btnTitleInitState);
@@ -56,13 +56,13 @@ export default function SchoolArea({
   const handleSubmit = (e) => {
     e.preventDefault();
     const array = [
-      school,
-      study,
+      work,
+      enterprise,
       dateBegin,
       dateEnd,
-      dataToEdit.key !== undefined ? dataToEdit.key : uuidv4(),
+      workDataToEdit.key !== undefined ? workDataToEdit.key : uuidv4(),
     ];
-    addSchoolExpFn(array);
+    addWorkExpFn(array);
     e.target.reset();
     handleReset();
   };
@@ -72,15 +72,15 @@ export default function SchoolArea({
       <form onSubmit={handleSubmit}>
         <NameInputs
           type="text"
-          placeholder="School Name"
-          value={school}
-          onChange={handleSchoolChange}
+          placeholder="Work position"
+          value={work}
+          onChange={handleWorkChange}
         />
         <NameInputs
           type="text"
-          placeholder="Studies"
-          value={study}
-          onChange={handleStudyChange}
+          placeholder="Enterprise"
+          value={enterprise}
+          onChange={handleEnterpriseChange}
         />
         <NameInputs
           type="date"
@@ -100,10 +100,9 @@ export default function SchoolArea({
   );
 }
 
-SchoolArea.propTypes = {
+WorkArea.propTypes = {
   className: PropTypes.string,
   addSchoolExpFn: PropTypes.func,
   schoolEditionBoolean: PropTypes.bool,
-  dataToEdit: PropTypes.object,
-  toggleEditionBoolean: PropTypes.func,
+  workDataToEdit: PropTypes.object,
 };

@@ -33,7 +33,8 @@
 }
 
 .name-area-class,
-.school-area-class {
+.school-area-class,
+.work-area-class {
   border: 1px solid darkblue;
   display: flex;
   flex-direction: column;
