@@ -16,17 +16,18 @@ export default function SchoolArea({
   const [dateEnd, setDateEndValue] = useState('');
 
   useEffect(() => {
-    if (schoolEditionBoolean === true) {
+    if (schoolEditionBoolean && dataToEdit) {
       console.log('Inside useEffect');
       console.log(dataToEdit.school);
-      setSchoolValue(dataToEdit.school || '');
-      setStudyValue(dataToEdit.study || '');
-      setDateBeginValue(dataToEdit.dateBegin || '');
-      setDateEndValue(dataToEdit.dateEnd || '');
+      setSchoolValue(dataToEdit.school);
+      setStudyValue(dataToEdit.study);
+      setDateBeginValue(dataToEdit.dateBegin);
+      setDateEndValue(dataToEdit.dateEnd);
     }
   }, [schoolEditionBoolean, dataToEdit]);
 
   const handleSchoolChange = (e) => {
+    e.preventDefault();
     setSchoolValue(e.target.value);
   };
 
@@ -51,7 +52,13 @@ export default function SchoolArea({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const array = [school, study, dateBegin, dateEnd, uuidv4()];
+    const array = [
+      school,
+      study,
+      dateBegin,
+      dateEnd,
+      dataToEdit.key !== undefined ? dataToEdit.key : uuidv4(),
+    ];
     addSchoolExpFn(array);
     e.target.reset();
     handleReset();
@@ -86,6 +93,13 @@ export default function SchoolArea({
         />
         <button type="submit">Validate</button>
       </form>
+      <div>
+        <p>School: {school}</p>
+        <p>Study: {study}</p>
+        <p>Date Begin: {dateBegin}</p>
+        <p>Date End: {dateEnd}</p>
+        <p>Key : {dataToEdit.key}</p>
+      </div>
     </div>
   );
 }

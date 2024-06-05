@@ -38,7 +38,24 @@ export default function App() {
   }
 
   function addSchoolExpFn(array) {
-    setSchoolExp((prevSchoolExp) => [...prevSchoolExp, array]);
+    // Check if the array already exists in schoolExp
+    const index = schoolExp.findIndex((exp) => exp[4] === array[4]);
+    console.log('This is schoolExp');
+    console.log(schoolExp);
+    console.log('this is new array');
+    console.log(array);
+    if (index !== -1) {
+      // If it exists, update the existing array
+      const updatedSchoolExp = [...schoolExp];
+      updatedSchoolExp[index] = array;
+      setSchoolExp(updatedSchoolExp);
+      // If index !== -1 mean already exist so we're in edition mode, so we need to close it
+      toggleEditionBoolean();
+      setDataToEdit({});
+    } else {
+      // If it doesn't exist, add the new array to schoolExp
+      setSchoolExp((prevSchoolExp) => [...prevSchoolExp, array]);
+    }
   }
 
   function toggleEditionBoolean() {
