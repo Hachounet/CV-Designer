@@ -10,6 +10,7 @@ export default function CVNameArea({
 }) {
   return (
     <div className={className}>
+      <h2>Curriculum Vitae</h2>
       <p>
         {firstName} {lastName}
       </p>

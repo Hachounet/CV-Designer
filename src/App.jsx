@@ -45,11 +45,9 @@ export default function App() {
 
   function addSchoolExpFn(array) {
     // Check if the array already exists in schoolExp
-    const index = schoolExp.findIndex((exp) => exp[4] === array[4]);
-    console.log('This is schoolExp');
-    console.log(schoolExp);
-    console.log('this is new array');
-    console.log(array);
+    const index = schoolExp.findIndex(
+      (exp) => exp[exp.length - 1] === array[array.length - 1]
+    );
     if (index !== -1) {
       // If it exists, update the existing array
       const updatedSchoolExp = [...schoolExp];
@@ -65,7 +63,9 @@ export default function App() {
   }
 
   function addWorkExpFn(array) {
-    const index = workExp.findIndex((exp) => exp[4] === array[4]);
+    const index = workExp.findIndex(
+      (exp) => exp[exp.length - 1] === array[array.length - 1]
+    );
     if (index !== -1) {
       const updatedWorkExp = [...workExp];
       updatedWorkExp[index] = array;
@@ -74,6 +74,7 @@ export default function App() {
       setWorkDataToEdit({});
     } else {
       setWorkExp((prevWorkExp) => [...prevWorkExp, array]);
+      console.log(workEditionBoolean);
     }
   }
 
@@ -91,8 +92,7 @@ export default function App() {
     const dataKey = parent.getAttribute('data-key');
 
     schoolExp.forEach((array, arrayIndex) => {
-      if (array[4] === dataKey) {
-        console.log('This is array number', arrayIndex);
+      if (array[array.length - 1] === dataKey) {
         giveToEdition(array);
       }
     });
@@ -104,21 +104,20 @@ export default function App() {
     const dataKey = parent.getAttribute('data-key');
 
     workExp.forEach((array) => {
-      if (array[4] === dataKey) {
+      if (array[array.length - 1] === dataKey) {
         giveToWorkEdition(array);
       }
     });
   }
 
   function giveToEdition(array) {
-    console.log('GiveToEdition function');
     setSchoolEditionBoolean(true);
     setDataToEdit({
       school: array[0],
       study: array[1],
       dateBegin: array[2],
       dateEnd: array[3],
-      key: array[4],
+      key: array[array.length - 1],
     });
     console.log(dataToEdit);
   }
@@ -128,10 +127,31 @@ export default function App() {
     setWorkDataToEdit({
       work: array[0],
       enterprise: array[1],
-      dateBegin: array[2],
-      dateEnd: array[3],
-      key: array[4],
+      responsabilities: array[2],
+      dateBegin: array[3],
+      dateEnd: array[4],
+      key: array[array.length - 1],
     });
+  }
+
+  function deleteExp(event) {
+    const btn = event.target;
+    const parent = btn.closest('li');
+    const dataKey = parent.getAttribute('data-key');
+    const grandParent = parent.closest('div');
+
+    console.log('I am launched');
+    console.log(grandParent);
+
+    if (grandParent.classList.contains('CV-school-area-class')) {
+      setSchoolExp((prevSchoolExp) =>
+        prevSchoolExp.filter((exp) => exp[exp.length - 1] !== dataKey)
+      );
+    } else if (grandParent.classList.contains('CV-work-area-class')) {
+      setWorkExp((prevWorkExp) =>
+        prevWorkExp.filter((exp) => exp[exp.length - 1] !== dataKey)
+      );
+    }
   }
 
   // ----------------------------------------------- Edit values ----------------------------------------------
@@ -149,6 +169,7 @@ export default function App() {
           workExpArray={workExp}
           editFn={handleEditSchoolExp}
           workEditFn={handleWorkEditSchoolExp}
+          deleteFn={deleteExp}
         ></CV>
       </div>
       <div className="App-Edit">

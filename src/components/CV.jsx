@@ -13,10 +13,25 @@ export default function CV({
   workExpArray,
   editFn,
   workEditFn,
+  deleteFn,
 }) {
   const CVNameAreaClass = 'CV-name-area-class';
   const CVSchoolAreaClass = 'CV-school-area-class';
   const CVWorkAreaClass = 'CV-work-area-class';
+
+  const positionTitleClass = 'position-title';
+  const schoolClass = 'school-title';
+  const enterpriseClass = 'enterprise';
+  const studiesClass = 'studies';
+  const dateClass = 'date';
+
+  const CSSHelperObj = {
+    position: positionTitleClass,
+    school: schoolClass,
+    enterprise: enterpriseClass,
+    studies: studiesClass,
+    date: dateClass,
+  };
 
   return (
     <div className={className}>
@@ -31,11 +46,15 @@ export default function CV({
         className={CVSchoolAreaClass}
         array={schoolExpArray}
         editFn={editFn}
+        deleteFn={deleteFn}
+        cssHelpers={CSSHelperObj}
       ></CVSchoolArea>
       <CVWorkArea
         className={CVWorkAreaClass}
         array={workExpArray}
         editFn={workEditFn}
+        deleteFn={deleteFn}
+        cssHelpers={CSSHelperObj}
       ></CVWorkArea>
     </div>
   );

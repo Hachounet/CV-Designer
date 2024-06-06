@@ -1,8 +1,30 @@
+.position-title,
+.school-title {
+  color: black;
+  font-weight: 900;
+}
+
+.enterprise,
+.studies {
+  color: darkslategrey;
+  font-style: oblique;
+}
+
+.date {
+  color: darkslategrey;
+  font-weight: 900;
+}
+
 .CV-class {
   background-color: whitesmoke;
-  border: 1px solid dark;
   width: 67%;
   height: 95%;
+  overflow: scroll;
+  h2 {
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+  }
 }
 
 .CV-name-area-class {
@@ -17,13 +39,6 @@
 
 .CV-school-area-class,
 .CV-work-area-class {
-  h2 {
-    display: flex;
-    justify-content: center;
-  }
-
-  border: 3px solid darkgreen;
-
   ul {
     display: flex;
     flex-direction: column;
@@ -33,4 +48,6 @@
   li {
     list-style: none;
   }
+
+  padding: 2rem;
 }

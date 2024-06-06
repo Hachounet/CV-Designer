@@ -11,17 +11,20 @@ export default function WorkArea({
 }) {
   const [work, setWorkValue] = useState('');
   const [enterprise, setEnterpriseValue] = useState('');
+  const [responsabilities, setResponsabilitiesValue] = useState('');
   const [dateBegin, setDateBeginValue] = useState('');
   const [dateEnd, setDateEndValue] = useState('');
   const btnTitleInitState = 'Validate';
   const [btnTitle, setBtnTitle] = useState(btnTitleInitState);
 
   useEffect(() => {
+    console.log(workEditionBoolean);
     if (workEditionBoolean && workDataToEdit) {
       console.log('Inside useEffect');
-      console.log(workDataToEdit.work);
+      console.log(workDataToEdit);
       setWorkValue(workDataToEdit.work);
       setEnterpriseValue(workDataToEdit.enterprise);
+      setResponsabilitiesValue(workDataToEdit.responsabilities);
       setDateBeginValue(workDataToEdit.dateBegin);
       setDateEndValue(workDataToEdit.dateEnd);
       setBtnTitle('Edit');
@@ -37,6 +40,10 @@ export default function WorkArea({
     setEnterpriseValue(e.target.value);
   };
 
+  const handleRespChange = (e) => {
+    setResponsabilitiesValue(e.target.value);
+  };
+
   const handleDateBeginChange = (e) => {
     setDateBeginValue(e.target.value);
   };
@@ -48,6 +55,7 @@ export default function WorkArea({
   const handleReset = () => {
     setWorkValue('');
     setEnterpriseValue('');
+    setResponsabilitiesValue('');
     setDateBeginValue('');
     setDateEndValue('');
     setBtnTitle(btnTitleInitState);
@@ -55,13 +63,17 @@ export default function WorkArea({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const array = [
       work,
       enterprise,
+      responsabilities,
       dateBegin,
       dateEnd,
       workDataToEdit.key !== undefined ? workDataToEdit.key : uuidv4(),
     ];
+
+    console.log(array);
     addWorkExpFn(array);
     e.target.reset();
     handleReset();
@@ -81,6 +93,12 @@ export default function WorkArea({
           placeholder="Enterprise"
           value={enterprise}
           onChange={handleEnterpriseChange}
+        />
+        <NameInputs
+          type="text"
+          placeholder="Description of responsabilities"
+          value={responsabilities}
+          onChange={handleRespChange}
         />
         <NameInputs
           type="date"
