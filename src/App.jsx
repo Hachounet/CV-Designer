@@ -6,6 +6,7 @@ import SchoolArea from './components/SchoolArea';
 
 import { useState } from 'react';
 import WorkArea from './components/WorkArea';
+import GenericBtn from './components/GenericBtn';
 
 export default function App() {
   const nameAreaClass = 'name-area-class';
@@ -29,6 +30,8 @@ export default function App() {
   const [workDataToEdit, setWorkDataToEdit] = useState({});
 
   const [checkbox, setCheckbox] = useState(false);
+
+  const [hideBtn, setHideBtn] = useState(false);
 
   function handleFirstName(newValue) {
     setFirstName(newValue);
@@ -163,6 +166,29 @@ export default function App() {
     console.log('I am switching checkbox bool', checkbox);
   };
 
+  const handleHideBtns = (event) => {
+    event.preventDefault();
+
+    setHideBtn((prevState) => !prevState);
+
+    const CV = document.getElementsByClassName('App-CV');
+    const btns = [];
+
+    Array.from(CV).forEach((element) => {
+      const elementButtons = element.querySelectorAll('button');
+      btns.push(...elementButtons);
+    });
+
+    if (hideBtn) {
+      btns.forEach((btn) => {
+        btn.classList.add('hide');
+      });
+    } else {
+      btns.forEach((btn) => {
+        btn.classList.remove('hide');
+      });
+    }
+  };
   // ----------------------------------------------- Edit values ----------------------------------------------
 
   return (
@@ -204,6 +230,10 @@ export default function App() {
           tillNowFn={handleCheckboxClick}
           tillNowDisabled={checkbox}
         ></WorkArea>
+        <GenericBtn
+          fn={handleHideBtns}
+          text="Hide CV Buttons"
+        ></GenericBtn>
       </div>
     </>
   );
