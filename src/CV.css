@@ -19,7 +19,7 @@
   background-color: whitesmoke;
   width: 67%;
   height: 95%;
-  overflow: scroll;
+  overflow: auto;
   h2 {
     display: flex;
     justify-content: center;

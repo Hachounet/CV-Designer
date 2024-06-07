@@ -12,6 +12,7 @@ export default function App() {
   const schoolAreaClass = 'school-area-class';
   const workAreaClass = 'work-area-class';
   const CVClass = 'CV-class';
+  const checkboxClass = 'checkbox';
 
   // ------------------------------------------------ CV Values ----------------------------------------------
   const [firstName, setFirstName] = useState('FirstName');
@@ -26,6 +27,8 @@ export default function App() {
   const [workExp, setWorkExp] = useState([]);
   const [workEditionBoolean, setWorkEditionBoolean] = useState(false);
   const [workDataToEdit, setWorkDataToEdit] = useState({});
+
+  const [checkbox, setCheckbox] = useState(false);
 
   function handleFirstName(newValue) {
     setFirstName(newValue);
@@ -62,7 +65,7 @@ export default function App() {
     }
   }
 
-  function addWorkExpFn(array) {
+  const addWorkExpFn = (array) => {
     const index = workExp.findIndex(
       (exp) => exp[exp.length - 1] === array[array.length - 1]
     );
@@ -76,7 +79,7 @@ export default function App() {
       setWorkExp((prevWorkExp) => [...prevWorkExp, array]);
       console.log(workEditionBoolean);
     }
-  }
+  };
 
   function toggleEditionBoolean() {
     setSchoolEditionBoolean((previousState) => !previousState);
@@ -154,6 +157,12 @@ export default function App() {
     }
   }
 
+  const handleCheckboxClick = (event) => {
+    event.stopPropagation();
+    setCheckbox((prevState) => !prevState);
+    console.log('I am switching checkbox bool', checkbox);
+  };
+
   // ----------------------------------------------- Edit values ----------------------------------------------
 
   return (
@@ -191,6 +200,9 @@ export default function App() {
           addWorkExpFn={addWorkExpFn}
           workEditionBoolean={workEditionBoolean}
           workDataToEdit={workDataToEdit}
+          checkboxClass={checkboxClass}
+          tillNowFn={handleCheckboxClick}
+          tillNowDisabled={checkbox}
         ></WorkArea>
       </div>
     </>

@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import NameInputs from './NameInputs';
+import IsDisabledInput from './IsDisabledInput';
 import { v4 as uuidv4 } from 'uuid';
+import TillNowBtn from './TillNowBtn';
 
 export default function WorkArea({
   className,
   addWorkExpFn,
   workEditionBoolean,
   workDataToEdit,
+  checkboxClass,
+  tillNowFn,
+  tillNowDisabled,
 }) {
   const [work, setWorkValue] = useState('');
   const [enterprise, setEnterpriseValue] = useState('');
@@ -15,6 +20,7 @@ export default function WorkArea({
   const [dateBegin, setDateBeginValue] = useState('');
   const [dateEnd, setDateEndValue] = useState('');
   const btnTitleInitState = 'Validate';
+  const btnTitleSecondState = 'Edit';
   const [btnTitle, setBtnTitle] = useState(btnTitleInitState);
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export default function WorkArea({
       setResponsabilitiesValue(workDataToEdit.responsabilities);
       setDateBeginValue(workDataToEdit.dateBegin);
       setDateEndValue(workDataToEdit.dateEnd);
-      setBtnTitle('Edit');
+      setBtnTitle(btnTitleSecondState);
     }
   }, [workEditionBoolean, workDataToEdit]);
 
@@ -63,13 +69,14 @@ export default function WorkArea({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const array = [
       work,
       enterprise,
       responsabilities,
       dateBegin,
-      dateEnd,
+      tillNowDisabled ? 'now' : dateEnd,
       workDataToEdit.key !== undefined ? workDataToEdit.key : uuidv4(),
     ];
 
@@ -106,12 +113,18 @@ export default function WorkArea({
           value={dateBegin}
           onChange={handleDateBeginChange}
         />
-        <NameInputs
+        <IsDisabledInput
           type="date"
           placeholder="13/11/2024"
           value={dateEnd}
           onChange={handleDateEndChange}
+          tillNowDisabled={tillNowDisabled}
         />
+        <TillNowBtn
+          className={checkboxClass}
+          tillNowFn={tillNowFn}
+        />
+
         <button type="submit">{btnTitle}</button>
       </form>
     </div>
@@ -120,7 +133,7 @@ export default function WorkArea({
 
 WorkArea.propTypes = {
   className: PropTypes.string,
-  addSchoolExpFn: PropTypes.func,
-  schoolEditionBoolean: PropTypes.bool,
+  addWorkExpFn: PropTypes.func,
+  workEditionBoolean: PropTypes.bool,
   workDataToEdit: PropTypes.object,
 };
