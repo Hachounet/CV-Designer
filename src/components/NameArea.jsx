@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import NameInputs from './NameInputs';
+import SubmitBtn from './SubmitBtn';
 
 export default function NameArea({
   className,
@@ -13,6 +14,8 @@ export default function NameArea({
   const [inputLastNameValue, setInputLastNameValue] = useState('');
   const [inputEmailValue, setInputEmailValue] = useState('');
   const [inputTelValue, setInputTelValue] = useState('');
+
+  const btnTitle = 'Validate';
 
   const handleFirstNameChange = (e) => {
     setInputFirstNameValue(e.target.value);
@@ -78,7 +81,7 @@ export default function NameArea({
           onChange={handleTelChange}
         ></NameInputs>
 
-        <button type="submit">Validate</button>
+        <SubmitBtn btnTitle={btnTitle}></SubmitBtn>
       </form>
     </div>
   );

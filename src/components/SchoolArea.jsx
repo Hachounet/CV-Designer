@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import NameInputs from './NameInputs';
 import { v4 as uuidv4 } from 'uuid';
+import SubmitBtn from './SubmitBtn';
 
 export default function SchoolArea({
   className,
@@ -94,7 +95,7 @@ export default function SchoolArea({
           value={dateEnd}
           onChange={handleDateEndChange}
         />
-        <button type="submit">{btnTitle}</button>
+        <SubmitBtn btnTitle={btnTitle}></SubmitBtn>
       </form>
     </div>
   );

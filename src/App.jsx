@@ -7,6 +7,7 @@ import SchoolArea from './components/SchoolArea';
 import { useState } from 'react';
 import WorkArea from './components/WorkArea';
 import GenericBtn from './components/GenericBtn';
+import PrintBtn from './components/PrintBtn';
 
 export default function App() {
   const nameAreaClass = 'name-area-class';
@@ -234,6 +235,7 @@ export default function App() {
           fn={handleHideBtns}
           text="Hide CV Buttons"
         ></GenericBtn>
+        <PrintBtn></PrintBtn>
       </div>
     </>
   );

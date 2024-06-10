@@ -1,3 +1,7 @@
 export default function GenericBtn({ fn, text }) {
-  return <button onClick={fn}>{text}</button>;
+  return (
+    <button onClick={fn}>
+      <span>{text}</span>
+    </button>
+  );
 }

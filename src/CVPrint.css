@@ -1,7 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .position-title,
 .school-title {
   color: black;
   font-weight: 900;
+}
+
+body {
+  max-width: 100%;
 }
 
 .enterprise,
@@ -26,8 +36,6 @@ button {
 
 .CV-class {
   background-color: whitesmoke;
-  width: 67%;
-  height: 95%;
   overflow: auto;
   h2 {
     display: flex;
@@ -39,6 +47,8 @@ button {
 .CV-name-area-class {
   padding: 2rem 1rem;
   background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 
   color: rgb(219, 218, 218);
 

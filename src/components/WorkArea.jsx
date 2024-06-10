@@ -4,6 +4,7 @@ import NameInputs from './NameInputs';
 import IsDisabledInput from './IsDisabledInput';
 import { v4 as uuidv4 } from 'uuid';
 import TillNowBtn from './TillNowBtn';
+import SubmitBtn from './SubmitBtn';
 
 export default function WorkArea({
   className,
@@ -125,7 +126,7 @@ export default function WorkArea({
           tillNowFn={tillNowFn}
         />
 
-        <button type="submit">{btnTitle}</button>
+        <SubmitBtn btnTitle={btnTitle}></SubmitBtn>
       </form>
     </div>
   );
